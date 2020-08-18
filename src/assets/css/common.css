@@ -1,0 +1,253 @@
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+.flex-lr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-around {
+  display: flex;
+  justify-content: space-around;
+}
+.flex-column{
+  display: flex !important;
+  flex-direction: column !important;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-start {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.flex-end {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.flex-start-align-center {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+.flex__it {
+  flex: 1;
+}
+.align-center {
+  display: flex;
+  align-items: center;
+}
+.align-self {
+  align-self: flex-start;
+}
+.justify-self-start{
+  justify-self: flex-start
+}
+.justify-center{
+  display: flex;
+  justify-content: center;
+}
+.justify-start{
+  display: flex;
+  justify-content: flex-start;
+}
+.justify-end{
+  display: flex;
+  justify-content: flex-end;
+}
+.j-between{
+  display: flex;
+  justify-content: space-between
+}
+.color999 {
+  color: #999999;
+}
+.mar_tb-10{
+  margin: 10px 0;
+}
+.mar_b20r50 {
+  margin: 0 50px 20px 0;
+}
+.mar_l-10 {
+  margin-left: 10px !important;
+}
+.mar_l-15 {
+  margin-left: 15px !important;
+}
+.mar_l-30 {
+  margin-left: 30px !important;
+}
+.mar_r-10 {
+  margin-right: 10px !important;
+}
+.mar_b-10 {
+  margin-bottom: 10px !important;
+}
+.mar_b-15 {
+  margin-bottom: 15px !important;
+}
+
+.mar_r-15 {
+  margin-right: 15px !important;
+}
+.mar_r-30 {
+  margin-right: 30px !important;
+}
+.mar_t-15{
+  margin-top: 15px !important;
+}
+.mar_t-20 {
+  margin-top: 20px !important;
+}
+.mar_b-20 {
+  margin-bottom: 20px !important;
+}
+.padd_b-15{
+  padding-bottom: 15px !important;
+}
+.errorColor {
+  color: rgb(177, 34, 34);
+}
+.border-n{
+  border: none !important;
+}
+.border-b{
+  border-bottom: 1px solid #e8eaec;
+}
+.border-r{
+  border-right: 1px solid #dddddd;
+}
+.border-r-dashed{
+  border-right: 1px dashed #dddddd;
+}
+.line1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.word-break{
+  word-break:break-all;
+  word-wrap:break-word;
+  word-break: normal;
+}
+.inline-block{
+  display: inline-block
+}
+.fwblod{
+  font-weight: bold;
+}
+.success {
+  color: #19be6b !important;
+}
+.info {
+  color: #2d8cf0 !important;;
+}
+.warning {
+  color: #ff9900;
+}
+.error {
+  color: #ed4014;
+}
+.pink{
+  color: red;
+}
+.gray{
+  color: #999999
+}
+.font-sm{
+  font-size: 14px;
+}
+.fr{
+  float: right;
+}
+.fl{
+  float: left;
+}
+.line1_text{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+.line2_text{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+.cursor-p{
+  cursor: pointer;
+}
+.date-picker-wrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.date-picker-wrap .ivu-date-picker {
+  flex: 1;
+}
+.prefix {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border: 1px solid #ddd;
+  height: 32px;
+  line-height: 32px;
+  transform: translateX(2px);
+  background: #f8f8f9;
+  padding: 0 10px;
+  font-size: 12px;
+}
+.tabs-flex{
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #dddddd;
+}
+.tabs-flex .tabs-item{
+  margin: 0 20px;
+  list-style: none;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+.tabs-flex li.active{
+  border-bottom: 2px solid #2d8cf0;
+  color: #2d8cf0;
+}
+.webtax-sbwh{
+  color: #2d8cf0;
+}
+.animate-tip{
+  font-size: 14px;
+  margin-left: 15px;
+  padding: 0 10px;
+  font-weight: bold;
+  animation:gogogo 1s infinite linear ;
+}
+@keyframes gogogo {
+  0% {
+    box-shadow: 0px 0px 4px 0px #ffffff;
+    color: #999999;
+  }
+
+  50% {
+    box-shadow: 0px 0px 4px 0px red;
+    color: red;
+  }
+
+  100% {
+    box-shadow: 0px 0px 4px 0px #ffffff;
+    color: #999999;
+  }
+}
