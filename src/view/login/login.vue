@@ -38,11 +38,11 @@
             _login.isGetCode = false
             _login.form.tips = ''
             _login.form.vcode = ''
-            this.getDictList().then(() => {
+            // this.getDictList().then(() => {
               this.$router.push({
                 name: this.$config.homeName
               })
-            })
+            // })
           })
         })
       }

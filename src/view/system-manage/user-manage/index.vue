@@ -55,7 +55,7 @@
         @on-success="handleModalSuccess"
         @cancel="fnCloseModal"/>
 
-      <Button :disabled="!hasAddOperation" type="primary" @click="fnShowAddModal">新增用户</Button>
+      <Button type="primary" @click="fnShowAddModal">新增用户</Button>
       <Button style="margin: 10px 5px;" type="info" @click="handleRefreshTable">刷新</Button>
       <!--表格-->
       <div v-if="true">
@@ -148,12 +148,6 @@
             key: 'nickName',
             align: 'center',
             minWidth: 150
-          },
-          {
-            title: '角色',
-            key: 'roles',
-            align: 'center',
-            width: 150
           },
           {
             title: '状态',
@@ -318,7 +312,7 @@
           props: {
             type: 'text',
             size: 'small',
-            disabled: !this.$hasOneOf(this.operators, ['user$allot_roles'])
+            disabled: false
           },
           class: 'table-col-ctlBtn',
           on: {
@@ -331,7 +325,7 @@
           props: {
             type: 'text',
             size: 'small',
-            disabled: !this.$hasOneOf(this.operators, ['user$edit_by_user_id'])
+            disabled: false
           },
           class: 'table-col-ctlBtn',
           on: {
@@ -342,7 +336,7 @@
         }, '编辑')
         let resetBtn = h('Button', {
           props: {
-            disabled: !this.$hasOneOf(this.operators, ['user$update_pass']),
+            disabled: false,
             type: 'text',
             size: 'small'
           },
@@ -355,7 +349,7 @@
         }, '修改密码')
         let delBtn = h('Button', {
           props: {
-            disabled: !this.$hasOneOf(this.operators, ['user$delete_by_user_id']),
+            disabled: false,
             type: 'text',
             size: 'small'
           },

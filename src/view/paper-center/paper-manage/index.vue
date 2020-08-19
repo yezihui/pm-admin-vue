@@ -98,13 +98,6 @@ export default {
           width: 140
         },
         {
-          title: '产品编号',
-          key: 'paperNo',
-          align: 'center',
-          width: 180,
-          sortable: true
-        },
-        {
           title: '产品名称',
           key: 'paperName',
           align: 'center',
@@ -130,10 +123,22 @@ export default {
           width: 200
         }, 
         {
+          title: '耐折强度',
+          key: 'foldStrength',
+          align: 'center',
+          width: 200
+        }, 
+        {
           title: '环压指数',
           key: 'ringCrush',
           align: 'center',
           width: 200
+        },
+        {
+          title: '水分',
+          key: 'moisture',
+          align: 'center',
+          width: 150
         },
         {
           title: '价格',
@@ -142,8 +147,8 @@ export default {
           width: 150
         },
         {
-          title: '创建时间',
-          key: 'createTime',
+          title: '更新时间',
+          key: 'updateTime',
           sortable: true,
           sortType: 'desc',
           align: 'center',

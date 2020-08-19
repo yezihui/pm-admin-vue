@@ -1,34 +1,78 @@
 <template>
-  <Modal v-model="isVisible" @on-visible-change="visibleChange">
+  <Modal v-model="isVisible" @on-visible-change="visibleChange" width="800px">
     <p slot="header">
       <span>新增纸张</span>
     </p>
     <div>
       <Form ref="form" :model="form" :rules="rules" :label-width="80">
-        <FormItem prop="paperType" label="纸种">
-          <Input v-model="form.paperType"/>
-        </FormItem>
-        <FormItem prop="paperNo" label="产品编号">
-          <Input v-model="form.paperNo"/>
-        </FormItem>
-        <FormItem prop="paperName" label="产品名称">
-          <Input v-model="form.paperName"/>
-        </FormItem>
-        <FormItem prop="paperWeight" label="克重">
-          <Input v-model="form.paperWeight"/>
-        </FormItem>
-        <FormItem prop="paperOrigin" label="产地">
-          <Input v-model="form.paperOrigin"/>
-        </FormItem>
-        <FormItem prop="popStrength" label="耐破指数">
-          <Input v-model="form.popStrength"/>
-        </FormItem>
-        <FormItem prop="ringCrush" label="环压指数">
-          <Input v-model="form.ringCrush"/>
-        </FormItem>
-        <FormItem prop="paperPrice" label="价格">
-          <Input v-model="form.paperPrice"/>
-        </FormItem>
+        <Row>
+          <Col span="12">
+            <FormItem prop="paperType" label="纸种">
+              <Input v-model="form.paperType"/>
+            </FormItem>
+          </Col>
+          <Col span="12">
+            <FormItem prop="paperName" label="产品名称">
+              <Input v-model="form.paperName"/>
+            </FormItem>
+          </Col>
+        </Row>
+        <Row>
+          <Col span="12">
+            <FormItem prop="paperWeight" label="克重">
+              <Input v-model="form.paperWeight"/>
+            </FormItem>
+          </Col>
+          <Col span="12">
+            <FormItem prop="paperOrigin" label="产地">
+              <Input v-model="form.paperOrigin"/>
+            </FormItem>
+          </Col>
+        </Row>
+        <Row>
+          <Col span="12">
+            <FormItem prop="popStrength" label="耐破指数">
+              <Input v-model="form.popStrength"/>
+            </FormItem>
+          </Col>
+          <Col span="12">
+            <FormItem prop="foldStrength" label="耐折强度">
+              <Input v-model="form.foldStrength"/>
+            </FormItem>
+          </Col>
+        </Row>
+        <Row>
+          <Col span="12">
+            <FormItem prop="ringCrush" label="环压指数">
+              <Input v-model="form.ringCrush"/>
+            </FormItem>
+          </Col>
+          <Col span="12">
+            <FormItem prop="moisture" label="水分">
+              <Input v-model="form.moisture"/>
+            </FormItem>
+          </Col>
+        </Row>
+        <Row>
+          <Col span="8">
+           <FormItem prop="paperPrice" label="价格">
+            <Input v-model="form.paperPrice"/>
+          </FormItem>
+          </Col>
+          <Col span="4">
+            <FormItem prop="isEnabled"  label="起">
+              <i-switch v-model="form.isEnabled">
+                <span slot="1">开启</span>
+                <span slot="0">关闭</span>
+              </i-switch>
+            </FormItem>
+          </Col>
+          <Col span="8">
+           <FormItem prop="updateTime" label="更新时间">
+              <DatePicker type="datetime" v-model="form.updateTime" placeholder="请选择更新时间"></DatePicker>
+          </FormItem>
+          </Col>
+        </Row>
       </Form>
     </div>
     <div slot="footer">
@@ -59,9 +103,6 @@ export default {
         paperType: [
           { required: true, message: '纸种不能为空', trigger: 'blur' }
         ],
-        paperNo: [
-          { required: true, message: '产品编号不能为空', trigger: 'blur' }
-        ],
         paperName: [
           { required: true, message: '产品名称不能为空', trigger: 'blur' }
         ],
@@ -74,8 +115,14 @@ export default {
         popStrength: [
           { required: true, message: '耐破指数不能为空', trigger: 'blur' }
         ],
+        foldStrength: [
+          { required: true, message: '耐这强度不能为空', trigger: 'blur' }
+        ],
         ringCrush: [
           { required: true, message: '环压指数不能为空', trigger: 'blur' }
+        ],
+        moisture: [
+          { required: true, message: '水分不能为空', trigger: 'blur' }
         ],
         paperPrice: [
           { required: true, message: '价格不能为空', trigger: 'blur' }
@@ -85,13 +132,16 @@ export default {
       loading: false,
       form: {
         paperType: '',
-        paperNo: '',
         paperName: '',
         paperWeight: '',
         paperOrigin: '',
         popStrength: '',
+        foldStrength: '',
         ringCrush: '',
-        paperPrice: ''
+        moisture: '',
+        paperPrice: '',
+        updateTime: null,
+        isBottom: false
       }
     };
   },
@@ -120,6 +170,9 @@ export default {
               this.$Notice.error('网络异常');
               this.loading = false;
             });
+        } else {
+          this.$Message.error('必填项不能为空!');
+          vm.loading = false;
         }
       });
     },
