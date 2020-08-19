@@ -108,7 +108,6 @@ export default {
     this.operators = [...this.$store.state.user.activeMenuOperators]
     // 实例完成后首先加载表格,配置notCache=true后，此页面需要缓存
     this.fnInitData()
-    this.setDropList()
   },
   watch: {
     reloadTable: function (val) {

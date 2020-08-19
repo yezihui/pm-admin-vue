@@ -61,14 +61,14 @@ export default {
       state.hasGetInfo = status
     },
     getOperatorsFromMenus(state, menu) {
-      let activeMenu = getOperators(state.menus, menu)
-      if (Object.keys(activeMenu).length && menu) {
-        state.activeMenuOperators = activeMenu.operators.split(',')
-        localStorage.setItem('activeMenuOperators', activeMenu.operators)
-      } else {
-        localStorage.setItem('activeMenuOperators', [])
-        state.activeMenuOperators = []
-      }
+      // let activeMenu = getOperators(state.menus, menu)
+      // if (Object.keys(activeMenu).length && menu) {
+      //   state.activeMenuOperators = activeMenu.operators.split(',')
+      //   localStorage.setItem('activeMenuOperators', activeMenu.operators)
+      // } else {
+      //   localStorage.setItem('activeMenuOperators', [])
+      //   state.activeMenuOperators = []
+      // }
     },
     getSubOperatorsFromMenus(state, menu) {
       let activeMenu = getOperators(state.menus, menu)

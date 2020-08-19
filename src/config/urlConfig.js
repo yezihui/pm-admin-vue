@@ -4,8 +4,8 @@
  *  网站根目录地址 （生产环境，测试环境, 开发环境）
  */
 // const proURL = ''; // 正式环境
-const devURL = 'http://127.0.0.1:8082/'; // 开发环境ip
-const testURL = 'http://39.101.213.249:8082/'; // 测试环境域名
+const devURL = 'http://121.89.172.245:8082/'; // 开发环境ip
+const testURL = 'http://121.89.172.245:8082/'; // 测试环境域名
 const proURL = 'http://39.101.216.84:8082/'; // 正式环境域名
 
 const env = process.env.NODE_ENV;

@@ -116,7 +116,7 @@ export default {
           { required: true, message: '耐破指数不能为空', trigger: 'blur' }
         ],
         foldStrength: [
-          { required: true, message: '耐这强度不能为空', trigger: 'blur' }
+          { required: true, message: '耐折强度不能为空', trigger: 'blur' }
         ],
         ringCrush: [
           { required: true, message: '环压指数不能为空', trigger: 'blur' }
@@ -153,14 +153,28 @@ export default {
       this.form.avatar = url.fileSavePath;
     },
     onChange(e) {
-      console.log(e);
     },
     // 提交更改
     ok() {
       this.$refs.form.validate(valid => {
+        let vm = this;
+        let time = vm.form.updateTime ? this.$moment(vm.form.updateTime).format('YYYY-MM-DD HH:mm:ss') : null;
         if (valid) {
           this.loading = true;
-          addPaper(this.form)
+          let request = {
+            paperType: vm.form.paperType,
+            paperName: vm.form.paperName,
+            paperWeight: vm.form.paperWeight,
+            paperOrigin: vm.form.paperOrigin,
+            popStrength: vm.form.popStrength,
+            foldStrength: vm.form.foldStrength,
+            ringCrush: vm.form.ringCrush,
+            moisture: vm.form.moisture,
+            paperPrice: vm.form.paperPrice,
+            isBottom: vm.form.isBottom,
+            updateTime: time
+          };
+          addPaper(request)
             .then(res => {
               this.loading = false;
               this.cancel();

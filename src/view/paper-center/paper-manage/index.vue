@@ -72,7 +72,7 @@ export default {
         pageNo: 1,
         pageSize: 10,
         sort: ['desc'],
-        orderField: ['createTime'],
+        orderField: ['updateTime'],
         condition: {
           paperName: null
         }
@@ -126,19 +126,19 @@ export default {
           title: '耐折强度',
           key: 'foldStrength',
           align: 'center',
-          width: 200
+          width: 100
         }, 
         {
           title: '环压指数',
           key: 'ringCrush',
           align: 'center',
-          width: 200
+          width: 190
         },
         {
           title: '水分',
           key: 'moisture',
           align: 'center',
-          width: 150
+          width: 100
         },
         {
           title: '价格',
@@ -187,7 +187,7 @@ export default {
         {
           value: 2,
           label: '删除纸张',
-          disabled: !this.hasDeleteOperation
+          disabled: false
         }
       ]
     },

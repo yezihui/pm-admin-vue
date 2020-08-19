@@ -386,7 +386,7 @@ export const getHomeRoute = (routers, homeName = 'home') => {
 export const getOperators = (userMenus, menuCode) => {
   let res = [];
   let i = -1;
-  let len = userMenus.length;
+  // let len = userMenus.length;
   // while (++i < len) {
   //   let item = userMenus[i];
   //   if (item.children && item.children.length) {
@@ -408,18 +408,18 @@ export const getOperators = (userMenus, menuCode) => {
 export const findFromUserMenus = (userMenus, routeName) => {
   let node = {};
   let i = -1;
-  let len = userMenus.length;
-  while (++i < len) {
-    let item = userMenus[i];
-    if (item.menuCode === routeName) {
-      return item;
-    } else {
-      if (item.children && item.children.length) {
-        let res = findFromUserMenus(item.children, routeName);
-        if (res.menuCode) return res;
-      }
-    }
-  }
+  // let len = userMenus.length;
+  // while (++i < len) {
+  //   let item = userMenus[i];
+  //   if (item.menuCode === routeName) {
+  //     return item;
+  //   } else {
+  //     if (item.children && item.children.length) {
+  //       let res = findFromUserMenus(item.children, routeName);
+  //       if (res.menuCode) return res;
+  //     }
+  //   }
+  // }
 
   return node;
 };
@@ -558,19 +558,20 @@ export const getNewTagList = (list, newRoute) => {
  * @description 用户是否可跳转到该页
  */
 export const canTurnTo = (name, routes) => {
-  const routePermissionJudge = list => {
-    return list.some(item => {
-      if (item.children && item.children.length) {
-        if (item.name === name) {
-          return true;
-        }
-        return routePermissionJudge(item.children);
-      } else if (item.name === name) {
-        return true;
-      }
-    });
-  };
-  return routePermissionJudge(routes);
+  // const routePermissionJudge = list => {
+  //   return list.some(item => {
+  //     if (item.children && item.children.length) {
+  //       if (item.name === name) {
+  //         return true;
+  //       }
+  //       return routePermissionJudge(item.children);
+  //     } else if (item.name === name) {
+  //       return true;
+  //     }
+  //   });
+  // };
+  // return routePermissionJudge(routes);
+  return true;
 };
 
 /**

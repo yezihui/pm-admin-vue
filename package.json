@@ -33,7 +33,7 @@
     "html2canvas": "^1.0.0-rc.5",
     "jets": "^0.14.1",
     "js-cookie": "^2.2.1",
-    "moment": "^2.25.3",
+    "moment": "^2.27.0",
     "qrcode": "^1.4.4",
     "sortablejs": "^1.10.2",
     "tinymce": "^5.2.2",
