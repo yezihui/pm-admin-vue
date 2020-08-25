@@ -36,3 +36,25 @@ export const deletePaper = data => {
     method: 'delete'
   });
 };
+
+export const getPaperById = (id) => {
+  return axios.request({
+    url: '/paper/select/' + id,
+    headers: {
+      token: getToken()
+    },
+    method: 'get'
+  })
+}
+
+// 编辑用户信息
+export const editPaper = (id, data) => {
+  return axios.request({
+    url: '/paper/update/' + id,
+    headers: {
+      token: getToken()
+    },
+    data,
+    method: 'post'
+  })
+}

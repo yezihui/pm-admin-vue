@@ -1,7 +1,7 @@
 <template>
   <Modal v-model="isVisible" @on-visible-change="visibleChange" width="800px">
     <p slot="header">
-      <span>新增纸张</span>
+      <span>编辑纸张</span>
     </p>
     <div>
       <Form ref="form" :model="form" :rules="rules" :label-width="80"><Row>
@@ -89,16 +89,20 @@
 </template>
 
 <script>
-import { addPaper } from '@/api/paper/paper';
+import { editPaper, getPaperById } from '@/api/paper/paper';
 
 export default {
-  name: 'AddModal',
+  name: 'UpdateModal',
   components: {
   },
   props: {
     visible: {
       type: Boolean,
       default: false,
+      required: true
+    },
+    deliveryParam: {
+      type: Object,
       required: true
     }
   },
@@ -157,6 +161,25 @@ export default {
   mounted() {},
   computed: {},
   methods: {
+     fnGetData() {
+      // 获取数据
+      let vm = this;
+      getPaperById(this.deliveryParam.id).then(res => {
+        const data = res.data.data;
+        vm.form.paperType = data.paperType;
+        vm.form.paperNo = data.paperNo;
+        vm.form.paperName = data.paperName;
+        vm.form.paperWeight = data.paperWeight;
+        vm.form.paperOrigin = data.paperOrigin;
+        vm.form.popStrength = data.popStrength;
+        vm.form.foldStrength = data.foldStrength;
+        vm.form.ringCrush = data.ringCrush;
+        vm.form.moisture = data.moisture;
+        vm.form.paperPrice = data.paperPrice;
+        vm.form.updateTime = data.updateTime;
+        vm.form.isBottom = data.isBottom;
+      });
+    },
     // 提交更改
     ok() {
       this.$refs.form.validate(valid => {
@@ -178,10 +201,10 @@ export default {
             isBottom: vm.form.isBottom,
             updateTime: time
           };
-          addPaper(request)
+          editPaper(vm.deliveryParam.id, request)
             .then(res => {
-              this.loading = false;
-              this.cancel();
+              vm.loading = false;
+              vm.isVisible = false;
               this.$emit('on-success');
             })
             .catch((e) => {
@@ -217,6 +240,7 @@ export default {
         this.$emit('cancel');
       } else {
         this.isVisible = val;
+        this.fnGetData();
       }
     }
   }

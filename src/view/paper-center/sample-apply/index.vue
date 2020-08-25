@@ -27,18 +27,28 @@
         </div>
       </div>
     </Card>
+     <apply-model
+      :visible="visibleAddModal"
+      v-model="applyId"
+      @confim="confim"
+      @cancel="fnCloseModal"
+    ></apply-model>
   </div>
 </template>
 <script>
 
 import {sampleApplyListPage} from '@/api/paper/sampleApply'
 import { bus } from '@/Bus/bus.js';
+import ApplyModel from './comp/apply-model.vue';
 export default {
   name: 'sample-apply',
   components: {
+    ApplyModel
   },
   data () {
     return {
+      applyId: 0,
+      visibleAddModal: false,
       operators: [],
       // 是否刷新表格，用于操作表格数据后刷新表格条件
       reloadTable: false,
@@ -80,7 +90,22 @@ export default {
           title: '申请信息',
           key: 'message',
           align: 'center',
-          width: 1180
+          width: 900
+        },
+        {
+          title: '申请信息',
+          key: 'status',
+          align: 'center',
+          width: 180,
+          render: (h, params) => {
+            let text =
+              params.row.status === 0
+                ? '新申请'
+                : params.row.status === 1
+                ? '已拒绝'
+                : '已办理';
+            return h('div', {}, text);
+          }
         },
         {
           title: '申请时间',
@@ -89,6 +114,14 @@ export default {
           sortType: 'desc',
           align: 'center',
           width: 170
+        },
+        {
+          title: '操作',
+          key: 'action',
+          align: 'center',
+          width: 100,
+          fixed: 'right',
+          render: this.fnRenderTableOperation
         }
       ]
     }
@@ -117,12 +150,41 @@ export default {
     }
   },
   methods: {
+    traceAddModal(id) {
+      this.applyId = id;
+      this.visibleAddModal = true;
+    },
     success() {
       this.reloadTable = true;
       this.cancel()
     },
     cancel() {
       this.showResetPhone = false
+    },
+    confim() {
+      // 刷新表格
+      this.reloadTable = true;
+      this.$Message.success('操作成功');
+      this.fnCloseModal();
+    },
+    // 关闭弹框框
+    fnCloseModal() {
+      this.visibleAddModal = false;
+    },
+    fnRenderTableOperation(h, params) {
+      let editBtn = h('Button', {
+        props: {
+          type: 'text',
+          size: 'small'
+        },
+        class: 'table-col-ctlBtn',
+        on: {
+          click: () => {
+            this.traceAddModal(params.row.id)
+          }
+        }
+      }, '回访')
+      return h('div', [editBtn])
     },
     // 搜索
     handleSearch () {

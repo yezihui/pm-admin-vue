@@ -24,6 +24,11 @@
       
       <!--按钮-->
       <add-modal :visible="visibleAddModal" @on-success="handleModalSuccess" @cancel="fnCloseModal"></add-modal>
+      <update-modal
+        :visible="visibleEditModal"
+        :delivery-param="editRow"
+        @on-success="handleModalSuccess"
+        @cancel="fnCloseModal"/>
       <!--表格-->
       <div v-if="true">
         <Table border stripe ref="dataTable"
@@ -53,10 +58,12 @@
 import {deletePaper, paperListPage} from '@/api/paper/paper'
 import { bus } from '@/Bus/bus.js';
 import addModal from './comp/add-paper/add-paper';
+import updateModal from './comp/update-paper/update-paper';
+
 export default {
   name: 'paper-manage',
   components: {
-    addModal
+    addModal, updateModal
   },
   data () {
     return {
@@ -65,6 +72,7 @@ export default {
       reloadTable: false,
       tableLoading: false,
       visibleAddModal: false,
+      visibleEditModal: false,
       selectId: '0',
       pageSizeOpts: [5, 10, 20, 50],
       // 分页请求
@@ -72,10 +80,13 @@ export default {
         pageNo: 1,
         pageSize: 10,
         sort: ['desc'],
-        orderField: ['updateTime'],
+        orderField: ['createTime'],
         condition: {
           paperName: null
         }
+      },
+      editRow: {
+        id: ''
       },
       // 分页信息
       pageInfo: {
@@ -95,7 +106,13 @@ export default {
           title: '纸种',
           key: 'paperType',
           align: 'center',
-          width: 140
+          width: 120
+        },
+        {
+          title: '产品编号',
+          key: 'paperNo',
+          align: 'center',
+          width: 180
         },
         {
           title: '产品名称',
@@ -107,7 +124,7 @@ export default {
           title: '克重',
           key: 'paperWeight',
           align: 'center',
-          width: 180,
+          width: 140,
           sortable: true
         },
         {
@@ -153,6 +170,14 @@ export default {
           sortType: 'desc',
           align: 'center',
           width: 170
+        },
+        {
+          title: '操作',
+          key: 'action',
+          align: 'center',
+          width: 150,
+          fixed: 'right',
+          render: this.fnRenderTableOperation
         }
       ]
     }
@@ -201,9 +226,15 @@ export default {
     createAddPage () {
        this.visibleAddModal = true;
     },
+    // 编辑弹框
+    fnShowEditModal(id) {
+      this.visibleEditModal = true
+      this.editRow.id = id
+    },
     // 关闭弹框框
     fnCloseModal() {
       this.visibleAddModal = false;
+      this.visibleEditModal = false;
     },
     // 弹框关闭，监控是否需要刷新表格
     handleModalSuccess() {
@@ -243,6 +274,33 @@ export default {
         this.tableLoading = false
         this.reloadTable = false
       })
+    },
+    fnRenderTableOperation(h, params) {
+      let editBtn = h('Button', {
+        props: {
+          type: 'text',
+          size: 'small'
+        },
+        class: 'table-col-ctlBtn',
+        on: {
+          click: () => {
+            this.fnShowEditModal(params.row.id)
+          }
+        }
+      }, '编辑')
+      let delBtn = h('Button', {
+        props: {
+          type: 'text',
+          size: 'small'
+        },
+        class: 'table-col-ctlBtn',
+        on: {
+          click: () => {
+            this.fnDel(params.row.id)
+          }
+        }
+      }, '删除')
+      return h('div', [editBtn, delBtn])
     },
     // 排序
     fnSort (table) {
@@ -296,6 +354,23 @@ export default {
       } else {
         this.$Message.warning('您未选择操作行')
       }
+    },
+    // 删除按钮
+    fnDel(id) {
+      let vm = this
+      this.$Modal.confirm({
+        title: '操作确认',
+        content: '此操作将无法恢复。是否继续删除?',
+        onOk: function () {
+          const ids = []
+          ids.push(id)
+          deletePaper(ids).then(() => {
+            vm.$Message.success('删除成功')
+            // 刷新表格
+            vm.reloadTable = true
+          })
+        }
+      })
     }
   },
   activated() {
