@@ -80,7 +80,7 @@ export default {
         pageNo: 1,
         pageSize: 10,
         sort: ['desc'],
-        orderField: ['createTime'],
+        orderField: ['updateTime'],
         condition: {
           paperName: null
         }
