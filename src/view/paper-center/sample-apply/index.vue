@@ -2,8 +2,29 @@
   <div>
     <Card>
       <p slot="title">抽样申请</p>
-      <Button type="success" style="margin: 0 0 10px 5px" @click="handleRefreshCurrentTable">刷新当前页</Button>
-      <Button type="info" style="margin: 0 0 10px 5px" @click="handleRefreshTable">刷新全部</Button>
+      <i-form ref="searchForm" :model="pageRequest.condition" inline>
+        <form-item prop="phone">
+          <i-input type="text" v-model="pageRequest.condition.phone" placeholder="请输入...">
+            <span slot="prepend">手机号</span>
+          </i-input>
+        </form-item>
+        <FormItem prop="status">
+          <Select v-model="pageRequest.condition.status" style="width: 200px">
+            <span slot="prefix" style="margin:0 10px;font-size: 12px">申请状态</span>
+            <Option
+              v-for="item in statusList"
+              :value="item.value"
+              :key="item.value"
+            >{{ item.label }}</Option>
+          </Select>
+        </FormItem>
+        <form-item>
+          <Button type="primary" @click="handleSearch">搜索</Button>
+        </form-item>
+        <form-item>
+          <Button type="error" @click="handleResetSearch('searchForm')">重置</Button>
+        </form-item>
+      </i-form>
       
       <!--表格-->
       <div v-if="true">
@@ -62,7 +83,8 @@ export default {
         sort: ['desc'],
         orderField: ['id'],
         condition: {
-          paperName: null
+          phone: null,
+          status: null
         }
       },
       // 分页信息
@@ -83,8 +105,8 @@ export default {
           title: '手机号',
           key: 'phone',
           align: 'center',
-          width: 180,
-          sortable: true
+          sortable: true,
+          width: 180
         },
         {
           title: '申请信息',
@@ -95,6 +117,7 @@ export default {
         {
           title: '申请信息',
           key: 'status',
+          sortable: true,
           align: 'center',
           width: 180,
           render: (h, params) => {
@@ -134,6 +157,9 @@ export default {
     // 删除项目权限
     hasDeleteOperation () {
       return true
+    },
+    statusList() {
+      return [{ value: 0, label: '新申请' }, { value: 1, label: '已拒绝' }, { value: 2, label: '已办理' }];
     }
   },
   mounted () {

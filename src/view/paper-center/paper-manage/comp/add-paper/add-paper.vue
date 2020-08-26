@@ -66,8 +66,8 @@
           </FormItem>
           </Col>
           <Col span="4">
-            <FormItem prop="isEnabled"  label="起">
-              <i-switch v-model="form.isEnabled">
+            <FormItem prop="isBottom"  label="起">
+              <i-switch v-model="form.isBottom">
                 <span slot="1">开启</span>
                 <span slot="0">关闭</span>
               </i-switch>

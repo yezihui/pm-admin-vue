@@ -4,9 +4,54 @@
       <p slot="title">纸张管理</p>
       <!--搜索表单-->
       <i-form ref="searchForm" :model="pageRequest.condition" inline>
-        <form-item prop="paper">
+        <form-item prop="paperName">
           <i-input type="text" v-model="pageRequest.condition.paperName" placeholder="请输入...">
             <span slot="prepend">纸张名称</span>
+          </i-input>
+        </form-item>
+        <form-item prop="paperType">
+          <i-input type="text" v-model="pageRequest.condition.paperType" placeholder="请输入...">
+            <span slot="prepend">纸种</span>
+          </i-input>
+        </form-item>
+        <FormItem prop="paperTypeValue">
+          <Select v-model="pageRequest.condition.paperTypeValue" style="width: 200px">
+            <span slot="prefix" style="margin:0 10px;font-size: 12px">纸种类型</span>
+            <Option
+              v-for="item in paperTypeValueList"
+              :value="item.value"
+              :key="item.value"
+            >{{ item.label }}</Option>
+          </Select>
+        </FormItem>
+        <form-item prop="paperOrigin">
+          <i-input type="text" v-model="pageRequest.condition.paperOrigin" placeholder="请输入...">
+            <span slot="prepend">产地</span>
+          </i-input>
+        </form-item>
+        <form-item prop="popStrength">
+          <i-input type="text" v-model="pageRequest.condition.popStrength" placeholder="请输入...">
+            <span slot="prepend">耐破指数</span>
+          </i-input>
+        </form-item>
+        <form-item prop="foldStrength">
+          <i-input type="text" v-model="pageRequest.condition.foldStrength" placeholder="请输入...">
+            <span slot="prepend">耐折强度</span>
+          </i-input>
+        </form-item>
+        <form-item prop="ringCrush">
+          <i-input type="text" v-model="pageRequest.condition.ringCrush" placeholder="请输入...">
+            <span slot="prepend">环压指数</span>
+          </i-input>
+        </form-item>
+        <form-item prop="moisture">
+          <i-input type="text" v-model="pageRequest.condition.moisture" placeholder="请输入...">
+            <span slot="prepend">水分</span>
+          </i-input>
+        </form-item>
+        <form-item prop="paperPrice">
+          <i-input type="text" v-model="pageRequest.condition.paperPrice" placeholder="请输入...">
+            <span slot="prepend">价格</span>
           </i-input>
         </form-item>
         <form-item>
@@ -19,8 +64,6 @@
 
       <Button type="primary" style="margin: 0 0 10px 0" :disabled="!hasAddOperation" @click="createAddPage">新增纸张</Button>
       <Button type="error" style="margin: 0 0 10px 5px" :disabled="!hasDeleteOperation" @click="handleBatchDelete">批量删除</Button>
-      <Button type="success" style="margin: 0 0 10px 5px" @click="handleRefreshCurrentTable">刷新当前页</Button>
-      <Button type="info" style="margin: 0 0 10px 5px" @click="handleRefreshTable">刷新全部</Button>
       
       <!--按钮-->
       <add-modal :visible="visibleAddModal" @on-success="handleModalSuccess" @cancel="fnCloseModal"></add-modal>
@@ -82,8 +125,17 @@ export default {
         sort: ['desc'],
         orderField: ['updateTime'],
         condition: {
-          paperName: null
+          paperName: null,
+          paperType: null,
+          paperTypeValue: null,
+          paperOrigin: null,
+          popStrength: null,
+          foldStrength: null,
+          ringCrush: null,
+          moisture: null,
+          paperPrice: null
         }
+        
       },
       editRow: {
         id: ''
@@ -105,61 +157,70 @@ export default {
         {
           title: '纸种',
           key: 'paperType',
+          sortable: true,
           align: 'center',
           width: 120
         },
         {
           title: '产品编号',
           key: 'paperNo',
+          sortable: true,
           align: 'center',
           width: 180
         },
         {
           title: '产品名称',
           key: 'paperName',
+          sortable: true,
           align: 'center',
           width: 180
         },
         {
           title: '克重',
           key: 'paperWeight',
+          sortable: true,
           align: 'center',
-          width: 140,
-          sortable: true
+          width: 140
         },
         {
           title: '产地',
           key: 'paperOrigin',
+          sortable: true,
           align: 'center',
           width: 120
         },
         {
           title: '耐破指数',
           key: 'popStrength',
+          sortable: true,
           align: 'center',
-          width: 200
+          width: 150
         }, 
         {
           title: '耐折强度',
           key: 'foldStrength',
+          sortable: true,
           align: 'center',
-          width: 100
+          width: 150
         }, 
         {
           title: '环压指数',
           key: 'ringCrush',
+          sortable: true,
           align: 'center',
           width: 190
         },
         {
           title: '水分',
           key: 'moisture',
+          sortable: true,
           align: 'center',
           width: 100
         },
         {
           title: '价格',
           key: 'paperPrice',
+          sortable: true,
           align: 'center',
           width: 150
         },
@@ -190,6 +251,9 @@ export default {
     // 删除纸张权限
     hasDeleteOperation () {
       return true
+    },
+    paperTypeValueList() {
+      return [{ value: 0, label: '牛卡纸' }, { value: 1, label: '瓦楞纸' }, { value: 2, label: '其他' }];
     }
   },
   mounted () {
