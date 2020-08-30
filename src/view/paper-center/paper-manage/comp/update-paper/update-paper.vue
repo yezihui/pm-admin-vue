@@ -1,13 +1,30 @@
 <template>
-  <Modal v-model="isVisible" @on-visible-change="visibleChange" width="800px">
+  <Modal v-model="isVisible" @on-visible-change="visibleChange" width="900px">
     <p slot="header">
       <span>编辑纸张</span>
     </p>
     <div>
-      <Form ref="form" :model="form" :rules="rules" :label-width="80"><Row>
+      <Form ref="form" :model="form" :rules="rules" :label-width="120">
+        <Row>
           <Col span="12">
             <FormItem prop="paperType" label="纸种">
               <Input v-model="form.paperType"/>
+            </FormItem>
+          </Col><Col span="12">
+            <FormItem prop="paperTypeEnglish" label="纸种英文">
+              <Input v-model="form.paperTypeEnglish"/>
+            </FormItem>
+          </Col>
+        </Row>
+        <Row>
+          <Col span="12">
+            <FormItem prop="paperName" label="产品名称">
+              <Input v-model="form.paperName"/>
+            </FormItem>
+          </Col>
+          <Col span="12">
+            <FormItem prop="paperNameEnglish" label="产品名称英文">
+              <Input v-model="form.paperNameEnglish"/>
             </FormItem>
           </Col>
         </Row>
@@ -18,20 +35,20 @@
             </FormItem>
           </Col>
           <Col span="12">
-            <FormItem prop="paperName" label="产品名称">
-              <Input v-model="form.paperName"/>
+            <FormItem prop="paperWeight" label="克重">
+              <Input v-model="form.paperWeight"/>
             </FormItem>
           </Col>
         </Row>
         <Row>
           <Col span="12">
-            <FormItem prop="paperWeight" label="克重">
-              <Input v-model="form.paperWeight"/>
+            <FormItem prop="paperOrigin" label="产地">
+              <Input v-model="form.paperOrigin"/>
             </FormItem>
           </Col>
           <Col span="12">
-            <FormItem prop="paperOrigin" label="产地">
-              <Input v-model="form.paperOrigin"/>
+            <FormItem prop="paperOriginEnglish" label="产地英文">
+              <Input v-model="form.paperOriginEnglish"/>
             </FormItem>
           </Col>
         </Row>
@@ -112,16 +129,25 @@ export default {
         paperType: [
           { required: true, message: '纸种不能为空', trigger: 'blur' }
         ],
+        paperTypeEnglish: [
+          { required: true, message: '纸种不能为空', trigger: 'blur' }
+        ],
         paperNo: [
           { required: true, message: '产品编号不能为空', trigger: 'blur' }
         ],
         paperName: [
           { required: true, message: '产品名称不能为空', trigger: 'blur' }
         ],
+        paperNameEnglish: [
+          { required: true, message: '产品名称不能为空', trigger: 'blur' }
+        ],
         paperWeight: [
           { required: true, message: '克重不能为空', trigger: 'blur' }
         ],
         paperOrigin: [
+          { required: true, message: '产地不能为空', trigger: 'blur' }
+        ],
+        paperOriginEnglish: [
           { required: true, message: '产地不能为空', trigger: 'blur' }
         ],
         popStrength: [
@@ -144,10 +170,13 @@ export default {
       loading: false,
       form: {
         paperType: '',
+        paperTypeEnglish: '',
         paperNo: '',
         paperName: '',
+        paperNameEnglish: '',
         paperWeight: '',
         paperOrigin: '',
+        paperOriginEnglish: '',
         popStrength: '',
         foldStrength: '',
         ringCrush: '',
@@ -167,10 +196,13 @@ export default {
       getPaperById(this.deliveryParam.id).then(res => {
         const data = res.data.data;
         vm.form.paperType = data.paperType;
+        vm.form.paperTypeEnglish = data.paperTypeEnglish;
         vm.form.paperNo = data.paperNo;
         vm.form.paperName = data.paperName;
+        vm.form.paperNameEnglish = data.paperNameEnglish;
         vm.form.paperWeight = data.paperWeight;
         vm.form.paperOrigin = data.paperOrigin;
+        vm.form.paperOriginEnglish = data.paperOriginEnglish;
         vm.form.popStrength = data.popStrength;
         vm.form.foldStrength = data.foldStrength;
         vm.form.ringCrush = data.ringCrush;
@@ -189,10 +221,13 @@ export default {
           this.loading = true;
           let request = {
             paperType: vm.form.paperType,
+            paperTypeEnglish: vm.form.paperTypeEnglish,
             paperNo: vm.form.paperNo,
             paperName: vm.form.paperName,
+            paperNameEnglish: vm.form.paperNameEnglish,
             paperWeight: vm.form.paperWeight,
             paperOrigin: vm.form.paperOrigin,
+            paperOriginEnglish: vm.form.paperOriginEnglish,
             popStrength: vm.form.popStrength,
             foldStrength: vm.form.foldStrength,
             ringCrush: vm.form.ringCrush,

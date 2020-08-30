@@ -109,13 +109,34 @@ export default {
           width: 180
         },
         {
-          title: '申请信息',
-          key: 'message',
+          title: '纸种',
+          key: 'paperType',
+          sortable: true,
           align: 'center',
-          width: 900
+          width: 120
         },
         {
-          title: '申请信息',
+          title: '产品编号',
+          key: 'paperNo',
+          sortable: true,
+          align: 'center',
+          width: 180
+        },
+        {
+          title: '产品名称',
+          key: 'paperName',
+          sortable: true,
+          align: 'center',
+          width: 180
+        },
+        {
+          title: '取样信息',
+          key: 'message',
+          align: 'center',
+          width: 420
+        },
+        {
+          title: '取样状态',
           key: 'status',
           sortable: true,
           align: 'center',

@@ -162,6 +162,13 @@ export default {
           width: 120
         },
         {
+          title: '纸种英文',
+          key: 'paperTypeEnglish',
+          sortable: true,
+          align: 'center',
+          width: 180
+        },
+        {
           title: '产品编号',
           key: 'paperNo',
           sortable: true,
@@ -176,6 +183,13 @@ export default {
           width: 180
         },
         {
+          title: '产品名称英文',
+          key: 'paperNameEnglish',
+          sortable: true,
+          align: 'center',
+          width: 250
+        },
+        {
           title: '克重',
           key: 'paperWeight',
           sortable: true,
@@ -185,6 +199,13 @@ export default {
         {
           title: '产地',
           key: 'paperOrigin',
+          sortable: true,
+          align: 'center',
+          width: 120
+        },
+        {
+          title: '产地英文',
+          key: 'paperOriginEnglish',
           sortable: true,
           align: 'center',
           width: 120
